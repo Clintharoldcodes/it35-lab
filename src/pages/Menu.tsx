@@ -9,6 +9,7 @@ import {
   } from '@ionic/react';
   
   const Menu: React.FC = () => {
+    
     return (
       <IonPage>
         <IonHeader>
@@ -17,7 +18,7 @@ import {
               <IonMenuButton></IonMenuButton>
             </IonButtons>
             <IonTitle>Menu</IonTitle>
-          </IonToolbar>
+          </IonToolbar> 
         </IonHeader>
         <IonContent fullscreen>
         </IonContent>
