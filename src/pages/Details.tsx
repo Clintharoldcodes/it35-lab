@@ -1,4 +1,6 @@
+
 import { 
+    IonBackButton,
     IonButtons,
       IonContent, 
       IonHeader, 
@@ -12,17 +14,18 @@ import {
     return (
       <IonPage>
         <IonHeader>
-          <IonToolbar>
+          <IonToolbar color="primary">
             <IonButtons slot='start'>
-              <IonMenuButton></IonMenuButton>
+                <IonBackButton defaultHref='/it35-lab/app/home'></IonBackButton>
             </IonButtons>
-            <IonTitle>About</IonTitle>
+            <IonTitle>Details</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <IonContent fullscreen>
+        <IonContent className='ion-padding'>
         </IonContent>
       </IonPage>
     );
   };
   
   export default Details;
+  
