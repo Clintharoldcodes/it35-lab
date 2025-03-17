@@ -23,14 +23,14 @@ const AlertBox: React.FC<{ message: string; isOpen: boolean; onClose: () => void
 
 const Login: React.FC = () => {
   const navigation = useIonRouter();
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [alertMessage, setAlertMessage] = useState('');
   const [showAlert, setShowAlert] = useState(false);
   const [showToast, setShowToast] = useState(false);
 
   const doLogin = () => {
-    if (!email || !password) {
+    if (!username || !password) {
       setAlertMessage('Please fill in all fields.');
       setShowAlert(true);
       return;
@@ -55,13 +55,13 @@ const Login: React.FC = () => {
           <h1>Pidol Code</h1>
 
           <IonInput
-            label="Email" 
+            label="Username" 
             labelPlacement="floating" 
             fill="outline"
-            type="email"
-            placeholder="Enter Email"
-            value={email}
-            onIonChange={e => setEmail(e.detail.value!)}
+            type="text"
+            placeholder="Enter Username"
+            value={username}
+            onIonChange={e => setUsername(e.detail.value!)}
             style={{ marginBottom: '15px', width: '90%' }}
           />
 
