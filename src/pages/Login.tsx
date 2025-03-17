@@ -1,51 +1,103 @@
-import { 
-    IonButton,
-    IonButtons,
-      IonContent, 
-      IonHeader, 
-      IonMenuButton, 
-      IonPage, 
-      IonTitle, 
-      IonToolbar, 
-      useIonRouter,
-      IonInput,
+import {
+  IonAlert,
+  IonButton,
+  IonContent, 
+  IonInput,  
+  IonPage,  
+  IonToast,  
+  useIonRouter
+} from '@ionic/react';
+import { useState } from 'react';
 
-  } from '@ionic/react';
-  import { useState } from 'react';
-  
-  const Login: React.FC = () => {
-    const navigation = useIonRouter();
-    const [email, setEmail] = useState('');
-  
-    const doLogin = () => {
-        navigation.push('/it35-lab/app','forward','replace');
+const AlertBox: React.FC<{ message: string; isOpen: boolean; onClose: () => void }> = ({ message, isOpen, onClose }) => {
+  return (
+    <IonAlert
+      isOpen={isOpen}
+      onDidDismiss={onClose}
+      header="Notification"
+      message={message}
+      buttons={['OK']}
+    />
+  );
+};
+
+const Login: React.FC = () => {
+  const navigation = useIonRouter();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [alertMessage, setAlertMessage] = useState('');
+  const [showAlert, setShowAlert] = useState(false);
+  const [showToast, setShowToast] = useState(false);
+
+  const doLogin = () => {
+    if (!email || !password) {
+      setAlertMessage('Please fill in all fields.');
+      setShowAlert(true);
+      return;
     }
-    return (
-      <IonPage>
-        <IonHeader>
-          <IonToolbar>
-            <IonTitle>Login</IonTitle>
-          </IonToolbar>
-        </IonHeader>
 
-        <IonInput
-                label="Email" 
-                labelPlacement="floating" 
-                fill="outline"
-                type="email"
-                placeholder="Enter Email"
-                value={email}
-                onIonChange={e => setEmail(e.detail.value!)}
-                style={{ marginBottom: '15px' }}
-              />
-
-        <IonContent className='ion-padding'>
-            <IonButton onClick={() => doLogin()} expand="full">
-                Login
-            </IonButton>
-        </IonContent>
-      </IonPage>
-    );
+    setShowToast(true);
+    setTimeout(() => {
+      navigation.push('/it35-lab/app', 'forward', 'replace');
+    }, 300);
   };
   
-  export default Login;
+  return (
+    <IonPage>
+      <IonContent className="ion-padding" fullscreen>
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh'
+        }}>
+          <h1>Pidol Code</h1>
+
+          <IonInput
+            label="Email" 
+            labelPlacement="floating" 
+            fill="outline"
+            type="email"
+            placeholder="Enter Email"
+            value={email}
+            onIonChange={e => setEmail(e.detail.value!)}
+            style={{ marginBottom: '15px', width: '90%' }}
+          />
+
+          <IonInput
+            label="Password"
+            labelPlacement="floating" 
+            fill="outline"
+            type="password"
+            placeholder="Enter Password"
+            value={password}
+            onIonChange={e => setPassword(e.detail.value!)}
+            style={{ marginBottom: '15px', width: '90%' }}
+          />
+
+          <IonButton onClick={doLogin} expand="full" shape='round'>
+            Login
+          </IonButton>
+
+          <IonButton routerLink="/it35-lab/Register" expand="full" fill="clear" shape='round' style={{ marginTop: '10px' }}>
+            Don't have an account? Register here
+          </IonButton>
+        </div>
+
+        <AlertBox message={alertMessage} isOpen={showAlert} onClose={() => setShowAlert(false)} />
+
+        <IonToast
+          isOpen={showToast}
+          onDidDismiss={() => setShowToast(false)}
+          message="Login successful! Redirecting..."
+          duration={1500}
+          position="top"
+          color="primary"
+        />
+      </IonContent>
+    </IonPage>
+  );
+};
+
+export default Login;
