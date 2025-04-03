@@ -1,4 +1,3 @@
-
 import { 
   IonAlert,
   IonAvatar,
@@ -11,7 +10,7 @@ import {
   IonToast,  
   useIonRouter
 } from '@ionic/react';
-import { logoIonic } from 'ionicons/icons';
+import { star } from 'ionicons/icons'; // Updated import
 import { useState } from 'react';
 import { supabase } from '../utils/supabaseClient';
 
@@ -72,7 +71,7 @@ const Login: React.FC = () => {
             }}
           >
             <IonIcon 
-              icon={logoIonic}
+              icon={star} // Replaced logoIonic with star
               color='primary'
               style={{ fontSize: '120px', color: '#6c757d' }} 
             />
