@@ -70,11 +70,6 @@ const Login: React.FC = () => {
               overflow: 'hidden' 
             }}
           >
-            <IonIcon 
-              icon={star} // Replaced logoIonic with star
-              color='primary'
-              style={{ fontSize: '120px', color: '#6c757d' }} 
-            />
           </IonAvatar>
           <h1 style={{
             display: 'flex',
