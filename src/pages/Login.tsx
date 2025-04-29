@@ -10,7 +10,7 @@ import {
   IonToast,  
   useIonRouter
 } from '@ionic/react';
-import { star } from 'ionicons/icons'; // Updated import
+import { logoIonic } from 'ionicons/icons';
 import { useState } from 'react';
 import { supabase } from '../utils/supabaseClient';
 
@@ -70,12 +70,17 @@ const Login: React.FC = () => {
               overflow: 'hidden' 
             }}
           >
+            <IonIcon 
+              icon={logoIonic}
+              color='primary'
+              style={{ fontSize: '120px', color: '#6c757d' }} 
+            />
           </IonAvatar>
           <h1 style={{
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-          }}>Login</h1>
+          }}>USER LOGIN</h1>
           <IonInput
             label="Email" 
             labelPlacement="floating" 
@@ -99,7 +104,7 @@ const Login: React.FC = () => {
           Login
         </IonButton>
 
-        <IonButton routerLink="/it35-lab/Register" expand="full" fill="clear" shape='round'>
+        <IonButton routerLink="/it35-lab/register" expand="full" fill="clear" shape='round'>
           Don't have an account? Register here
         </IonButton>
 

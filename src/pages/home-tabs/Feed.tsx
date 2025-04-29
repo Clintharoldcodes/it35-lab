@@ -22,7 +22,6 @@ const Feed: React.FC = () => {
       </IonHeader>
       <IonContent fullscreen>
         <FeedContainer />
-       
       </IonContent>
     </IonPage>
   );
