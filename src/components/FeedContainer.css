@@ -1,0 +1,22 @@
+.custom-content {
+    --background: #1e2f23;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch; /* ← Important for full-width cards */
+    justify-content: flex-start;
+    min-height: 100vh;
+    padding: 1rem 0; /* Top and bottom padding only */
+  }
+  
+  /* Full-width glowing card */
+  .glow-card {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    backdrop-filter: blur(8px);
+    border-radius: 0;
+    box-shadow: 0 0 15px 4px rgba(0, 255, 128, 0.3);
+    color: #ffffff;
+    width: 100%;
+    margin: 0; /* Remove margin between cards if you want tighter layout */
+  }
+  
