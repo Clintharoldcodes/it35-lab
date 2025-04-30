@@ -75,15 +75,13 @@ const Register: React.FC = () => {
             const hashedPassword = await bcrypt.hash(password, salt);
     
             // Insert user data into 'users' table
-            const { error: insertError } = await supabase.from("users").insert([
-                {
-                    username,
-                    user_email: email,
-                    user_firstname: firstName,
-                    user_lastname: lastName,
-                    user_password: hashedPassword,
-                },
-            ]);
+            const { error: insertError } = await supabase.from("users").insert([{
+                username,
+                user_email: email,
+                user_firstname: firstName,
+                user_lastname: lastName,
+                user_password: hashedPassword,
+            }]);
     
             if (insertError) {
                 throw new Error("Failed to save user data: " + insertError.message);
@@ -91,7 +89,6 @@ const Register: React.FC = () => {
     
             setShowSuccessModal(true);
         } catch (err) {
-            // Ensure err is treated as an Error instance
             if (err instanceof Error) {
                 setAlertMessage(err.message);
             } else {
@@ -103,31 +100,54 @@ const Register: React.FC = () => {
     
     return (
         <IonPage>
-            <IonContent className='ion-padding'>
-                <h1>Create your account</h1>
+            <IonContent
+                fullscreen
+                className="ion-padding"
+                style={{
+                    '--background': '#1e2f23', // Dark green palette
+                    color: '#ffffff',
+                    display: 'flex',
+                    justifyContent: 'center', // Center content vertically
+                    alignItems: 'center', // Center content horizontally
+                    height: '100vh', // Full height of the screen
+                }}
+            >
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+                    <div style={{
+                        maxWidth: '400px',
+                        width: '100%',
+                        background: 'rgba(255, 255, 255, 0.06)', // Transparent background
+                        padding: '20px',
+                        borderRadius: '10px',
+                        backdropFilter: 'blur(10px)', // Optional blur effect for a frosted look
+                        boxShadow: '0 4px 10px rgba(0, 0, 0, 0.15)', // Soft shadow to make it stand out
+                    }}>
+                        <h1 style={{ textAlign: 'center', marginBottom: '20px' }}>Create your account</h1>
 
-                <IonInput label="Username" labelPlacement="stacked" fill="outline" type="text" placeholder="Enter a unique username" value={username} onIonChange={e => setUsername(e.detail.value!)} style={{ marginTop: '15px' }} />
-                <IonInput label="First Name" labelPlacement="stacked" fill="outline" type="text" placeholder="Enter your first name" value={firstName} onIonChange={e => setFirstName(e.detail.value!)} style={{ marginTop: '15px' }} />
-                <IonInput label="Last Name" labelPlacement="stacked" fill="outline" type="text" placeholder="Enter your last name" value={lastName} onIonChange={e => setLastName(e.detail.value!)} style={{ marginTop: '15px' }} />
-                <IonInput label="Email" labelPlacement="stacked" fill="outline" type="email" placeholder="youremail@nbsc.edu.ph" value={email} onIonChange={e => setEmail(e.detail.value!)} style={{ marginTop: '15px' }} />
-                <IonInput label="Password" labelPlacement="stacked" fill="outline" type="password" placeholder="Enter password" value={password} onIonChange={e => setPassword(e.detail.value!)} style={{ marginTop: '15px' }} >
-                    <IonInputPasswordToggle slot="end" />
-                </IonInput>
-                <IonInput label="Confirm Password" labelPlacement="stacked" fill="outline" type="password" placeholder="Confirm password" value={confirmPassword} onIonChange={e => setConfirmPassword(e.detail.value!)} style={{ marginTop: '15px' }} >
-                    <IonInputPasswordToggle slot="end" />
-                </IonInput>
+                        <IonInput label="Username" labelPlacement="stacked" fill="outline" type="text" placeholder="Enter a unique username" value={username} onIonChange={e => setUsername(e.detail.value!)} style={{ marginTop: '15px', color: '#fff' }} />
+                        <IonInput label="First Name" labelPlacement="stacked" fill="outline" type="text" placeholder="Enter your first name" value={firstName} onIonChange={e => setFirstName(e.detail.value!)} style={{ marginTop: '15px', color: '#fff' }} />
+                        <IonInput label="Last Name" labelPlacement="stacked" fill="outline" type="text" placeholder="Enter your last name" value={lastName} onIonChange={e => setLastName(e.detail.value!)} style={{ marginTop: '15px', color: '#fff' }} />
+                        <IonInput label="Email" labelPlacement="stacked" fill="outline" type="email" placeholder="youremail@nbsc.edu.ph" value={email} onIonChange={e => setEmail(e.detail.value!)} style={{ marginTop: '15px', color: '#fff' }} />
+                        <IonInput label="Password" labelPlacement="stacked" fill="outline" type="password" placeholder="Enter password" value={password} onIonChange={e => setPassword(e.detail.value!)} style={{ marginTop: '15px', color: '#fff' }} >
+                            <IonInputPasswordToggle slot="end" />
+                        </IonInput>
+                        <IonInput label="Confirm Password" labelPlacement="stacked" fill="outline" type="password" placeholder="Confirm password" value={confirmPassword} onIonChange={e => setConfirmPassword(e.detail.value!)} style={{ marginTop: '15px', color: '#fff' }} >
+                            <IonInputPasswordToggle slot="end" />
+                        </IonInput>
 
-                <IonButton onClick={handleOpenVerificationModal} expand="full" shape='round' style={{ marginTop: '15px' }}>
-                    Register
-                </IonButton>
-                <IonButton routerLink="/it35-lab" expand="full" fill="clear" shape='round'>
-                    Already have an account? Sign in
-                </IonButton>
+                        <IonButton onClick={handleOpenVerificationModal} expand="full" shape="round" style={{ marginTop: '15px' }}>
+                            Register
+                        </IonButton>
+                        <IonButton routerLink="/it35-lab" expand="full" fill="clear" shape="round">
+                            Already have an account? Sign in
+                        </IonButton>
+                    </div>
+                </div>
 
                 {/* Verification Modal */}
                 <IonModal isOpen={showVerificationModal} onDidDismiss={() => setShowVerificationModal(false)}>
                     <IonContent className="ion-padding">
-                        <IonCard className="ion-padding" style={{ marginTop: '25%' }}>
+                        <IonCard className="ion-padding" style={{ marginTop: '25%', backgroundColor: 'rgba(255, 255, 255, 0.2)' }}>
                             <IonCardHeader>
                                 <IonCardTitle>User Registration Details</IonCardTitle>
                                 <hr />
